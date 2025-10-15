@@ -1,0 +1,32 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sample-ocp-app
+  title: sample-ocp-app
+  annotations:
+    janus-idp.io/tekton: sample-ocp-app
+    tektonci/build-namespace: demo
+    tekton.dev/cicd : "true"
+    quay.io/repository-slug: pminkows/sample-ocp-app
+    github.com/project-slug: piomin/sample-ocp-app
+    sonarqube.org/project-key: piomin_sample-ocp-app
+    backstage.io/kubernetes-id: sample-ocp-app
+    backstage.io/techdocs-ref: dir:.
+    argocd/app-name: sample-ocp-app
+    prometheus.io/rule: container_memory_usage_bytes{pod=~"sample-ocp-app-.*"}|pod,rate(container_cpu_usage_seconds_total{pod=~"sample-ocp-app-.*"}[5m])|pod
+  links:
+    - url: https://devspaces.apps.pminkows.95az.p1.openshiftapps.com#https://github.com/piomin/sample-ocp-app
+      title: 🚀 Develop App
+      icon: launch
+  tags:
+    - spring-boot
+    - java
+    - maven
+    - tekton
+    - argocd
+    - renovate
+    - sonarqube
+spec:
+  type: service
+  owner: piomin
+  lifecycle: experimental

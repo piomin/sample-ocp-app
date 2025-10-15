@@ -1,0 +1,11 @@
+site_name: sample-ocp-app
+site_description: 
+repo_url: https://github.com/piomin/sample-ocp-app
+edit_uri: edit/main/docs
+
+plugins:
+  - techdocs-core
+
+# Note for content editors, edit only the section below
+nav:
+  - sample-ocp-app Documentation: index.md
