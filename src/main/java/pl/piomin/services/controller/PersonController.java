@@ -12,7 +12,8 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class PersonController {
 
-    private final Logger LOG = LoggerFactory.getLogger(PersonController.class);
+    private final String idPath = "/{id}";
+    private final Logger log = LoggerFactory.getLogger(PersonController.class);
     private final List<Person> objs = new ArrayList<>();
 
     @GetMapping
@@ -20,28 +21,28 @@ public class PersonController {
         return objs;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(idPath)
     public Person findById(@PathVariable("id") Long id) {
         Person obj = objs.stream().filter(it -> it.getId().equals(id))
                 .findFirst()
                 .orElseThrow();
-        LOG.info("Found: {}", obj.getId());
+        log.info("Found: {}", obj.getId());
         return obj;
     }
 
     @PostMapping
     public Person add(@RequestBody Person obj) {
         obj.setId((long) (objs.size() + 1));
-        LOG.info("Added: {}", obj);
+        log.info("Added: {}", obj);
         objs.add(obj);
         return obj;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(idPath)
     public void delete(@PathVariable("id") Long id) {
         Person obj = objs.stream().filter(it -> it.getId().equals(id)).findFirst().orElseThrow();
         objs.remove(obj);
-        LOG.info("Removed: {}", id);
+        log.info("Removed: {}", id);
     }
 
     @PutMapping
@@ -51,7 +52,7 @@ public class PersonController {
                 .findFirst()
                 .orElseThrow();
         objs.set(objs.indexOf(objTmp), obj);
-        LOG.info("Updated: {}", obj.getId());
+        log.info("Updated: {}", obj.getId());
     }
 
 }
