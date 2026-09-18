@@ -1,0 +1,34 @@
+version: 2.1
+
+orbs:
+  maven: circleci/maven@1.4.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/openjdk:21.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - maven-deps-{{ checksum "pom.xml" }}
+            - maven-deps-
+      - run:
+          name: Build
+          command: mvn -B compile
+      - run:
+          name: Test
+          command: mvn -B test
+      - save_cache:
+          key: maven-deps-{{ checksum "pom.xml" }}
+          paths:
+            - ~/.m2
+      - store_test_results:
+          path: target/surefire-reports
+      - store_artifacts:
+          path: target/surefire-reports
+
+workflows:
+  build-and-test:
+    jobs:
+      - build-and-test
