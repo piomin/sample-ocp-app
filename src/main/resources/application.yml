@@ -1,10 +1,29 @@
-spring.application.name: sample-ocp-app
-
-springdoc.show-actuator: true
-
-management.endpoints.web.exposure.include: '*'
-management:
-  endpoint.health:
-    show-details: always
-    probes:
+spring:
+  application:
+    name: sample-ocp-app
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  h2:
+    console:
       enabled: true
+
+springdoc:
+  show-actuator: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true

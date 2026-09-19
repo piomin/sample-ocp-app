@@ -1,3 +1,5 @@
-/projects/sample-ocp-app/src/main/java/pl/piomin/services/Application.java
-/projects/sample-ocp-app/src/main/java/pl/piomin/services/controller/PersonController.java
-/projects/sample-ocp-app/src/main/java/pl/piomin/services/domain/Person.java
+/home/runner/work/sample-ocp-app/sample-ocp-app/src/main/java/pl/piomin/services/Application.java
+/home/runner/work/sample-ocp-app/sample-ocp-app/src/main/java/pl/piomin/services/controller/PersonController.java
+/home/runner/work/sample-ocp-app/sample-ocp-app/src/main/java/pl/piomin/services/domain/Person.java
+/home/runner/work/sample-ocp-app/sample-ocp-app/src/main/java/pl/piomin/services/repository/PersonRepository.java
+/home/runner/work/sample-ocp-app/sample-ocp-app/src/main/java/pl/piomin/services/service/PersonService.java
