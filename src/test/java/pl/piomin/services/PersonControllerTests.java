@@ -49,7 +49,7 @@ public class PersonControllerTests {
     void delete() {
         restTemplate.delete(API_PATH + "/{id}", 1L);
         Person obj = restTemplate.getForObject(API_PATH + "/{id}", Person.class, 1L);
-        assertNull(obj.getId());
+        assertNull(obj);
     }
 
 }
