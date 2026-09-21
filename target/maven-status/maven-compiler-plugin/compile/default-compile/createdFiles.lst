@@ -1,4 +1,6 @@
 pl/piomin/services/domain/Person.class
+pl/piomin/services/config/SecurityConfig.class
+pl/piomin/services/config/KeycloakRoleConverter.class
 pl/piomin/services/repository/PersonRepository.class
 pl/piomin/services/controller/PersonController.class
 pl/piomin/services/Application.class
