@@ -1,0 +1,25 @@
+name: Trigger OpenCode review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  trigger:
+    if: |
+      github.event.pull_request.user.login == 'renovate[bot]' ||
+      github.event.pull_request.user.login == 'opencode-agent[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Trigger OpenCode review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh workflow run opencode-review.yml \
+            --repo "$REPO" \
+            --ref "${{ github.event.repository.default_branch }}" \
+            -f pr_number="$PR_NUMBER"
