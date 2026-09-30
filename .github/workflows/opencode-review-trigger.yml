@@ -6,9 +6,6 @@ on:
 
 jobs:
   trigger:
-#    if: |
-#      github.event.pull_request.user.login == 'renovate[bot]' ||
-#      github.event.pull_request.user.login == 'opencode-agent[bot]'
     runs-on: ubuntu-latest
     permissions:
       actions: write
@@ -23,3 +20,34 @@ jobs:
             --repo "$REPO" \
             --ref "${{ github.event.repository.default_branch }}" \
             -f pr_number="$PR_NUMBER"
+
+          echo "Waiting for OpenCode workflow to start..."
+          
+          for i in {1..30}; do
+            RUN_ID=$(gh run list --repo "$REPO" --workflow opencode-review.yml --event workflow_dispatch --limit 20 --json databaseId,status,createdAt --jq 'map(select(.status != "completed")) | sort_by(.createdAt) | last | .databaseId') 
+          
+            if [ -n "$RUN_ID" ] && [ "$RUN_ID" != "null" ]; then
+              echo "OpenCode workflow started: $RUN_ID"
+              echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+              break
+            fi
+          
+            sleep 2
+          done
+          
+          if [ -z "${RUN_ID:-}" ] || [ "$RUN_ID" = "null" ]; then
+            echo "Could not find OpenCode workflow run"
+            exit 1
+          fi
+
+      - name: Wait for OpenCode review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ steps.dispatch.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          echo "Waiting for OpenCode run $RUN_ID..."
+          gh run watch "$RUN_ID" \ 
+            --repo "$REPO" \ 
+            --exit-status
