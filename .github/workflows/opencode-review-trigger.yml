@@ -6,9 +6,9 @@ on:
 
 jobs:
   trigger:
-    if: |
-      github.event.pull_request.user.login == 'renovate[bot]' ||
-      github.event.pull_request.user.login == 'opencode-agent[bot]'
+#    if: |
+#      github.event.pull_request.user.login == 'renovate[bot]' ||
+#      github.event.pull_request.user.login == 'opencode-agent[bot]'
     runs-on: ubuntu-latest
     permissions:
       actions: write
