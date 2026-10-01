@@ -16,7 +16,7 @@
         <sonar.projectKey>piomin_sample-ocp-app</sonar.projectKey>
         <sonar.organization>piomin</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <java.version>17</java.version>
+        <java.version>25</java.version>
     </properties>
 
     <dependencies>
@@ -112,7 +112,7 @@
                         <version>3.4.6</version>
                         <configuration>
                             <from>
-                                <image>eclipse-temurin:21-jdk-ubi9-minimal</image>
+                                <image>eclipse-temurin:25-jdk-ubi9-minimal</image>
                             </from>
                         </configuration>
                     </plugin>
