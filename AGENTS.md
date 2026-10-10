@@ -9,16 +9,16 @@ create or modify.
 Sample Spring Boot REST service used to demonstrate Backstage app skeletons and
 OpenShift deployment. Group id `pl.piomin.services`, artifact `sample-ocp-app`.
 
-| Item            | Value                                                     |
-|-----------------|-----------------------------------------------------------|
-| Language        | Java 17 (`java.version` in `pom.xml`)                    |
-| Framework       | Spring Boot 4.1.1 (parent POM)                           |
-| Build           | Maven                                                     |
-| Persistence     | Spring Data JPA, H2 (in-memory)                          |
+| Item            | Value                                                        |
+|-----------------|--------------------------------------------------------------|
+| Language        | Java 25 (`java.version` in `pom.xml`)                        |
+| Framework       | Spring Boot 4.1.1 (parent POM)                               |
+| Build           | Maven                                                        |
+| Persistence     | Spring Data JPA, H2 (in-memory)                              |
 | Auth            | OAuth2 resource server, JWT, Keycloak (`realm_access.roles`) |
-| Docs            | springdoc-openapi (`/swagger-ui.html`, `/v3/api-docs`)    |
-| Tests           | JUnit 5, Spring Security Test, Instancio, MockMvc         |
-| CI              | CircleCI: `mvn -B compile` then `mvn -B test`            |
+| Docs            | springdoc-openapi (`/swagger-ui.html`, `/v3/api-docs`)       |
+| Tests           | JUnit 5, Spring Security Test, Instancio, MockMvc            |
+| CI              | CircleCI: `mvn -B compile` then `mvn -B test`                |
 
 ## Commands
 
