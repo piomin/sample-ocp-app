@@ -22,8 +22,9 @@ public class SecurityConfig {
             // CSRF is disabled: JWT-based REST APIs are not vulnerable to CSRF attacks
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // Allow Actuator health/info endpoints without authentication
+                // Allow Actuator health/info and probe endpoints without authentication
                 .requestMatchers("/actuator/health/**", "/actuator/info").permitAll()
+                .requestMatchers("/health", "/ready").permitAll()
                 // Allow H2 console and Swagger UI in development (can be restricted in prod)
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
