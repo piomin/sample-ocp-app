@@ -43,4 +43,24 @@ public class PersonService {
         log.info("Updated: {}", updated.getId());
         return updated;
     }
+
+    public List<Person> findByAgeGreaterThan(int age) {
+        return repository.findByAgeGreaterThan(age);
+    }
+
+    public List<Person> findByAgeLessThan(int age) {
+        return repository.findByAgeLessThan(age);
+    }
+
+    public List<Person> findByNationality(String nationality) {
+        return repository.findByNationality(nationality);
+    }
+
+    public List<Person> findByAgeGreaterThanAndNationality(int age, String nationality) {
+        return repository.findByAgeGreaterThanAndNationality(age, nationality);
+    }
+
+    public List<Person> findByAgeLessThanAndNationality(int age, String nationality) {
+        return repository.findByAgeLessThanAndNationality(age, nationality);
+    }
 }

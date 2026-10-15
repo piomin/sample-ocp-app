@@ -15,6 +15,7 @@ public class Person {
     private String lastName;
     private int age;
     private String gender;
+    private String nationality;
 
     public Long getId() {
         return id;
@@ -56,9 +57,17 @@ public class Person {
         this.gender = gender;
     }
 
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
     @Override
     public String toString() {
         return "Person{id=" + id + ", firstName='" + firstName + "', lastName='" + lastName +
-                "', age=" + age + ", gender='" + gender + "'}";
+                "', age=" + age + ", gender='" + gender + "', nationality='" + nationality + "'}";
     }
 }

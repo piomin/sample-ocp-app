@@ -42,4 +42,31 @@ public class PersonController {
         return personService.update(obj);
     }
 
+    @GetMapping("/age/gt/{age}")
+    public List<Person> findByAgeGreaterThan(@PathVariable("age") int age) {
+        return personService.findByAgeGreaterThan(age);
+    }
+
+    @GetMapping("/age/lt/{age}")
+    public List<Person> findByAgeLessThan(@PathVariable("age") int age) {
+        return personService.findByAgeLessThan(age);
+    }
+
+    @GetMapping("/nationality/{nationality}")
+    public List<Person> findByNationality(@PathVariable("nationality") String nationality) {
+        return personService.findByNationality(nationality);
+    }
+
+    @GetMapping("/age/gt/{age}/nationality/{nationality}")
+    public List<Person> findByAgeGreaterThanAndNationality(@PathVariable("age") int age,
+                                                           @PathVariable("nationality") String nationality) {
+        return personService.findByAgeGreaterThanAndNationality(age, nationality);
+    }
+
+    @GetMapping("/age/lt/{age}/nationality/{nationality}")
+    public List<Person> findByAgeLessThanAndNationality(@PathVariable("age") int age,
+                                                        @PathVariable("nationality") String nationality) {
+        return personService.findByAgeLessThanAndNationality(age, nationality);
+    }
+
 }

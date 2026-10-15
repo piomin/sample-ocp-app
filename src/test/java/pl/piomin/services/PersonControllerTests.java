@@ -120,6 +120,68 @@ public class PersonControllerTests {
                 .andExpect(status().isUnauthorized());
     }
 
+    @Test
+    @Order(5)
+    void addWithNationality() throws Exception {
+        Person person = Instancio.create(Person.class);
+        person.setId(null);
+        person.setNationality("Polish");
+        person.setAge(30);
+
+        mockMvc.perform(post(API_PATH)
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_ADMIN")))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(toJson(person)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", notNullValue()))
+                .andExpect(jsonPath("$.nationality", is("Polish")));
+    }
+
+    @Test
+    @Order(6)
+    void findByNationality() throws Exception {
+        mockMvc.perform(get(API_PATH + "/nationality/{nationality}", "Polish")
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(greaterThan(0))));
+    }
+
+    @Test
+    @Order(6)
+    void findByAgeGreaterThan() throws Exception {
+        mockMvc.perform(get(API_PATH + "/age/gt/{age}", 18)
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(greaterThan(0))));
+    }
+
+    @Test
+    @Order(6)
+    void findByAgeLessThan() throws Exception {
+        mockMvc.perform(get(API_PATH + "/age/lt/{age}", 100)
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(greaterThan(0))));
+    }
+
+    @Test
+    @Order(6)
+    void findByAgeGreaterThanAndNationality() throws Exception {
+        mockMvc.perform(get(API_PATH + "/age/gt/{age}/nationality/{nationality}", 18, "Polish")
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(greaterThan(0))));
+    }
+
+    @Test
+    @Order(6)
+    void findByAgeLessThanAndNationality() throws Exception {
+        mockMvc.perform(get(API_PATH + "/age/lt/{age}/nationality/{nationality}", 100, "Polish")
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(greaterThan(0))));
+    }
+
     private String toJson(Object obj) throws JsonProcessingException {
         return objectMapper.writeValueAsString(obj);
     }
