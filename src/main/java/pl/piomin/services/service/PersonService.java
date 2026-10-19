@@ -63,4 +63,8 @@ public class PersonService {
     public List<Person> findByAgeLessThanAndNationality(int age, String nationality) {
         return repository.findByAgeLessThanAndNationality(age, nationality);
     }
+
+    public long count() {
+        return repository.count();
+    }
 }

@@ -27,6 +27,11 @@ public class PersonController {
         return personService.findById(id);
     }
 
+    @GetMapping("/count")
+    public long count() {
+        return personService.count();
+    }
+
     @PostMapping
     public Person add(@RequestBody Person obj) {
         return personService.add(obj);
