@@ -7,3 +7,9 @@
 
 In this project I'm demonstrating you the most interesting features of [Backstage](https://backstage.io/) for generating app skeletons. \
 This skeleton was generated automatically from the following [template](https://github.com/piomin/backstage-templates/blob/master/templates/spring-boot-basic/template.yaml).
+
+## Version
+
+Current version: `1.2.1`
+
+- `1.2.1` — added `GET /api/count` endpoint returning the number of `Person` records.

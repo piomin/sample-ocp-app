@@ -121,6 +121,13 @@ public class PersonControllerTests {
     }
 
     @Test
+    @Order(4)
+    void countWithoutAuthorizationShouldReturn401() throws Exception {
+        mockMvc.perform(get(API_PATH + "/count"))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
     @Order(5)
     void addWithNationality() throws Exception {
         Person person = Instancio.create(Person.class);
@@ -180,6 +187,15 @@ public class PersonControllerTests {
                         .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(greaterThan(0))));
+    }
+
+    @Test
+    @Order(6)
+    void count() throws Exception {
+        mockMvc.perform(get(API_PATH + "/count")
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
+                .andExpect(status().isOk())
+                .andExpect(content().string(matchesPattern("\\d+")));
     }
 
     private String toJson(Object obj) throws JsonProcessingException {
