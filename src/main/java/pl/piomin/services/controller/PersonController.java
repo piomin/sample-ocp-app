@@ -22,14 +22,14 @@ public class PersonController {
         return personService.findAll();
     }
 
-    @GetMapping(idPath)
-    public Person findById(@PathVariable Long id) {
-        return personService.findById(id);
-    }
-
     @GetMapping("/count")
     public long count() {
         return personService.count();
+    }
+
+    @GetMapping(idPath)
+    public Person findById(@PathVariable Long id) {
+        return personService.findById(id);
     }
 
     @PostMapping
