@@ -32,3 +32,8 @@ management:
       show-details: always
       probes:
         enabled: true
+      group:
+        liveness:
+          additional-path: "server:/health"
+        readiness:
+          additional-path: "server:/ready"
