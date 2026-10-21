@@ -10,6 +10,7 @@ This skeleton was generated automatically from the following [template](https://
 
 ## Version
 
-Current version: `1.2.1`
+Current version: `1.2.2`
 
+- `1.2.2` — added input validation for `Person` (`POST`/`PUT /api`) with `400` responses on invalid data, and `GET /api/{id}` now returns `404` instead of a null body when the person does not exist.
 - `1.2.1` — added `GET /api/count` endpoint returning the number of `Person` records.

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pl.piomin.services.domain.Person;
+import pl.piomin.services.exception.PersonNotFoundException;
 import pl.piomin.services.repository.PersonRepository;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class PersonService {
     }
 
     public Person findById(Long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(() -> new PersonNotFoundException(id));
     }
 
     public Person add(Person person) {

@@ -1,5 +1,6 @@
 package pl.piomin.services.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import pl.piomin.services.domain.Person;
 import pl.piomin.services.service.PersonService;
@@ -33,7 +34,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public Person add(@RequestBody Person obj) {
+    public Person add(@Valid @RequestBody Person obj) {
         return personService.add(obj);
     }
 
@@ -43,7 +44,7 @@ public class PersonController {
     }
 
     @PutMapping
-    public Person update(@RequestBody Person obj) {
+    public Person update(@Valid @RequestBody Person obj) {
         return personService.update(obj);
     }
 

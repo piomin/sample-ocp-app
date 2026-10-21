@@ -48,6 +48,7 @@ public class PersonControllerTests {
     void add() throws Exception {
         Person person = Instancio.create(Person.class);
         person.setId(null);
+        person.setAge(30);
 
         mockMvc.perform(post(API_PATH)
                         .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_ADMIN")))
@@ -84,8 +85,15 @@ public class PersonControllerTests {
 
         mockMvc.perform(get(API_PATH + "/{id}", 1L)
                         .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").doesNotExist());
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @Order(3)
+    void findByIdNotFoundShouldReturn404() throws Exception {
+        mockMvc.perform(get(API_PATH + "/{id}", 999_999L)
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_USER"))))
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -142,6 +150,37 @@ public class PersonControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", notNullValue()))
                 .andExpect(jsonPath("$.nationality", is("Polish")));
+    }
+
+    @Test
+    @Order(5)
+    void addWithBlankFirstNameShouldReturn400() throws Exception {
+        Person person = Instancio.create(Person.class);
+        person.setId(null);
+        person.setAge(30);
+        person.setFirstName(" ");
+
+        mockMvc.perform(post(API_PATH)
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_ADMIN")))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(toJson(person)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.firstName", notNullValue()));
+    }
+
+    @Test
+    @Order(5)
+    void addWithNegativeAgeShouldReturn400() throws Exception {
+        Person person = Instancio.create(Person.class);
+        person.setId(null);
+        person.setAge(-1);
+
+        mockMvc.perform(post(API_PATH)
+                        .with(jwt().authorities(new SimpleGrantedAuthority("ROLE_ADMIN")))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(toJson(person)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.age", notNullValue()));
     }
 
     @Test
