@@ -10,8 +10,9 @@ This skeleton was generated automatically from the following [template](https://
 
 ## Version
 
-Current version: `1.2.3`
+Current version: `1.2.4`
 
+- `1.2.4` — patch version bump.
 - `1.2.3` — patch version bump.
 - `1.2.2` — cosmetic README wording fix; patch version bump.
 - `1.2.1` — added `GET /api/count` endpoint returning the number of `Person` records.
