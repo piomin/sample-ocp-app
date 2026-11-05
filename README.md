@@ -10,8 +10,9 @@ This skeleton was generated automatically from the following [template](https://
 
 ## Version
 
-Current version: `1.2.4`
+Current version: `1.2.5`
 
+- `1.2.5` — patch version bump.
 - `1.2.4` — patch version bump.
 - `1.2.3` — patch version bump.
 - `1.2.2` — cosmetic README wording fix; patch version bump.
